@@ -1,6 +1,6 @@
 @import 'rehype-callouts/theme/vitepress';
 
-@layer base components;
+@layer base, components;
 
 @layer base {
   :root {
