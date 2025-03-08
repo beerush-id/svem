@@ -4,12 +4,13 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "build": "mpkg run build",
-    "dev": "mpkg run dev",
-    "dev:docs": "mpkg run dev -f docs",
-    "format": "mpkg run format",
-    "lint": "mpkg run lint",
-    "test": "mpkg run test"
+    "build": "bpkg run build",
+    "build:docs": "bpkg run build -f docs --standalone",
+    "dev": "bpkg run dev",
+    "dev:docs": "bpkg run dev -f docs",
+    "format": "bpkg run format",
+    "lint": "bpkg run lint",
+    "test": "bpkg run test"
   },
   "devDependencies": {
     "monopkg": "^0.2.1",
