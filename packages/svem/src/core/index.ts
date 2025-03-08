@@ -16,6 +16,7 @@ import {
   remarkCodeHighlight,
   remarkCodeImport,
   remarkCodePreview,
+  remarkDeepParse,
   remarkDirective,
   remarkDirectiveEject,
   remarkFlatMatter,
@@ -83,6 +84,7 @@ export async function transform(content: string, filename: string, options?: Mar
 
   const remark = unified()
     .use(remarkParse) // Parse markdown.
+    .use(remarkDeepParse)
     .use(remarkFlatMatter) // Extract frontmatter into file.data.
     .use(remarkDirective) // Custom directive support.
     .use(remarkAttributes); // Parse meta attributes.

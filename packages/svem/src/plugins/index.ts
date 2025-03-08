@@ -8,6 +8,7 @@ export * from './directive.js';
 export * from './heading.js';
 export * from './html.js';
 export * from './matter.js';
+export * from './parser.js';
 export * from './section.js';
 export * from './svelte.js';
 export * from './tab.js';
