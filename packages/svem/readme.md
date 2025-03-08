@@ -2,7 +2,7 @@
 
 Svem is a preprocessor for Svelte in Markdown. It allows you to write Svelte components in Markdown files. Insipired by Vitepress, Svem aims to provide a simple and easy way to write Svelte components in Markdown files.
 
-[preview.webm](https://beerush-id.github.io/svem/images/preview.webm)
+[![Preview](https://beerush-id.github.io/svem/images/preview.jpg)](https://beerush-id.github.io/svem/images/preview.webm)
 
 ## Installation
 
