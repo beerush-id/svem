@@ -69,5 +69,27 @@
     "shiki": "^3.0.0",
     "unified": "^11.0.5",
     "vfile-matter": "^5.0.0"
-  }
+  },
+  "description": "Svelte in Markdown preprocessor",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/beerush-id/svem.git"
+  },
+  "keywords": [
+    "svem",
+    "svelte",
+    "markdown",
+    "svelte",
+    "in",
+    "markdown",
+    "preprocessor",
+    "svx",
+    "svex"
+  ],
+  "author": "Nanang Mahdaen El Agung <mahdaen@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/beerush-id/svem/issues"
+  },
+  "homepage": "https://github.com/beerush-id/svem#readme"
 }
