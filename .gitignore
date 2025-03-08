@@ -1,5 +1,6 @@
 node_modules
 *.lock
+package-lock.json
 
 # Output
 .output
