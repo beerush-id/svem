@@ -1,0 +1,73 @@
+{
+  "type": "module",
+  "name": "svem",
+  "version": "0.0.1",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.js",
+  "devDependencies": {
+    "@eslint/css": "^0.4.0",
+    "@eslint/js": "^9.22.0",
+    "@eslint/markdown": "^6.3.0",
+    "@types/node": "^22.13.10",
+    "esbuild-raw-plugin": "^0.1.1",
+    "eslint": "^9.22.0",
+    "eslint-plugin-prettier": "^5.2.3",
+    "prettier": "^3.4.2",
+    "publint": "^0.3.2",
+    "rimraf": "^6.0.1",
+    "tsup": "^8.3.5",
+    "typescript-eslint": "^8.26.0"
+  },
+  "peerDependencies": {
+    "svelte": "^5.20.2",
+    "typescript": "^5.0.0"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./css": {
+      "types": "./dist/css/index.d.ts",
+      "import": "./dist/css/index.js"
+    },
+    "./css/*": "./dist/css/*",
+    "./plugins": {
+      "types": "./dist/plugins/index.d.ts",
+      "import": "./dist/plugins/index.js"
+    },
+    "./plugins/*": "./dist/plugins/*"
+  },
+  "directories": {
+    "dist": "./dist"
+  },
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "dev": "tsup --watch",
+    "clean": "rimraf dist",
+    "build": "rimraf dist && tsup && publint",
+    "format": "prettier --write .",
+    "prepublish": "rimraf dist && tsup && publint"
+  },
+  "dependencies": {
+    "@shikijs/transformers": "^3.0.0",
+    "rehype-callouts": "^2.0.1",
+    "rehype-parse": "^9.0.1",
+    "rehype-preset-minify": "^7.0.1",
+    "rehype-sanitize": "^6.0.0",
+    "rehype-stringify": "^10.0.1",
+    "remark-frontmatter": "^5.0.0",
+    "remark-gfm": "^4.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.1",
+    "shiki": "^3.0.0",
+    "unified": "^11.0.5",
+    "vfile-matter": "^5.0.0"
+  }
+}

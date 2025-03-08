@@ -1,0 +1,9 @@
+export { default as Caution } from './caution.js';
+export { default as ChevronRight } from './chevron-right.js';
+export { default as Clipboard } from './clipboard.js';
+export { default as Fire } from './fire.js';
+export { default as Important } from './important.js';
+export { default as Note } from './note.js';
+export { default as Pencil } from './pencil.js';
+export { default as Tip } from './tip.js';
+export { default as Warning } from './warning.js';
