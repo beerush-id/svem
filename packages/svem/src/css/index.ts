@@ -29,9 +29,11 @@ export function svemScript() {
 
           contents.forEach((c) => {
             if (c.getAttribute('aria-labelledby') === id) {
+              c.classList.remove('hidden');
               c.setAttribute('aria-hidden', 'false');
               c.setAttribute('data-tab-active', '');
             } else {
+              c.classList.add('hidden');
               c.setAttribute('aria-hidden', 'true');
               c.removeAttribute('data-tab-active');
             }

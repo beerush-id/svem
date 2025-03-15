@@ -59,7 +59,11 @@ export function createTab(children: XNode[], attrId?: string | number | XAttribu
           attributes: {
             id: `${tabId}-${child.attributes.id ?? i}-panel`,
             role: 'tabpanel',
-            class: ['tab-content', (child.attributes?.class as string[])?.join(' ') ?? ''].filter(Boolean),
+            class: [
+              'tab-content',
+              !child.attributes.active ? 'hidden' : '',
+              (child.attributes?.class as string[])?.join(' ') ?? '',
+            ].filter(Boolean),
             'aria-labelledby': `${tabId}-${child.attributes.id ?? i}-button`,
             'aria-hidden': child.attributes.active ? 'false' : 'true',
             'data-tab': tabId,

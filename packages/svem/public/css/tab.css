@@ -1,0 +1,74 @@
+@layer components {
+  .tab-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+  }
+
+  .tab-button-list {
+    display: inline-flex;
+    flex-direction: row;
+    align-self: flex-start;
+    align-items: center;
+    padding: var(--svem-spacing);
+    background-color: var(--svem-color-muted);
+    font-size: var(--svem-text-base);
+    line-height: calc(1.25 / 0.875);
+    font-weight: 500;
+    border-radius: var(--svem-radius);
+  }
+
+  .tab-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding-block: var(--svem-spacing);
+    padding-inline: calc(var(--svem-spacing) * 3);
+    border-radius: calc(var(--svem-radius) * 0.75);
+    color: var(--svem-color-muted-foreground);
+    transition: color 0.2s ease-in-out;
+    cursor: pointer;
+  }
+
+  .tab-button:hover,
+  .tab-button[data-tab-active] {
+    color: var(--svem-color-foreground);
+  }
+
+  .tab-button[data-tab-active] {
+    background-color: var(--svem-color-background);
+    box-shadow: var(--svem-shadow);
+  }
+
+  .tab-content {
+    margin-top: calc(var(--svem-spacing) * 2);
+  }
+
+  [role='tablist'] {
+    --tab-first-height: auto;
+  }
+
+  [role='tablist'] .tab-content.preview-panel {
+    flex-direction: column;
+    border-radius: var(--svem-radius);
+    border: 1px solid var(--svem-color-border);
+    padding: calc(var(--svem-spacing) * 10);
+    gap: calc(var(--svem-spacing) * 4);
+    align-items: flex-start;
+    min-height: calc(var(--svem-spacing) * 80);
+  }
+
+  [role='tablist'] .tab-content.code-panel .shiki {
+    height: var(--tab-first-height, 500px);
+  }
+
+  [role='tablist'] .tab-content.preview-panel[data-tab-active] {
+    display: flex;
+  }
+
+  [role='tablist'].preview-center-all .tab-content {
+    align-items: center;
+    justify-content: center;
+  }
+}
