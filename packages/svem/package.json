@@ -52,8 +52,7 @@
     "dev": "tsup --watch",
     "clean": "rimraf dist",
     "build": "rimraf dist && tsup && publint",
-    "format": "prettier --write .",
-    "publish": "rimraf dist && tsup && publint && npm publish"
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@shikijs/transformers": "^3.0.0",
