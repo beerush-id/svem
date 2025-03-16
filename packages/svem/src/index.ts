@@ -1,10 +1,10 @@
-import { type MarkidownOptions, transform } from './core/index.js';
+import { type SvemOptions, transform } from './core/index.js';
 import { parse, type PreprocessorGroup } from 'svelte/compiler';
 import { remarkSvelteEscape, remarkSvelteParse } from './plugins/index.js';
 import type { Plugin } from 'unified';
 
 export const LAYOUT_DATA_TOKEN = '__svemLayoutData';
-export const LAYOUT_WRAP_TOKEN = 'MarkidownLayout';
+export const LAYOUT_WRAP_TOKEN = 'SvemLayout';
 export const LAYOUT_META_TOKEN = 'meta';
 
 export type LayoutOptions = {
@@ -13,7 +13,7 @@ export type LayoutOptions = {
   [key: string]: string;
 };
 
-export type SvelteMarkidownOptions = MarkidownOptions & {
+export type SvelteSvemOptions = SvemOptions & {
   layout?: string;
   layouts?: LayoutOptions;
   annotateScript?: boolean;
@@ -21,7 +21,7 @@ export type SvelteMarkidownOptions = MarkidownOptions & {
   annotateClose?: string;
 };
 
-export const svem = (options?: SvelteMarkidownOptions): PreprocessorGroup => {
+export const svem = (options?: SvelteSvemOptions): PreprocessorGroup => {
   const { extensions = ['.svem', '.svx'] } = options ?? {};
 
   return {
@@ -112,8 +112,8 @@ function wrapLayout(code: string, layouts: Layouts, data: Record<string, unknown
   return output;
 }
 
-async function resolveLayouts(options: SvelteMarkidownOptions = {}) {
-  const { layout: layoutInput, layouts: layoutInputs = {} } = (options ?? {}) as SvelteMarkidownOptions;
+async function resolveLayouts(options: SvelteSvemOptions = {}) {
+  const { layout: layoutInput, layouts: layoutInputs = {} } = (options ?? {}) as SvelteSvemOptions;
   const layouts: Layouts = {} as never;
 
   if (layoutInput) {

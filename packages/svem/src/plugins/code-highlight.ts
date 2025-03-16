@@ -40,7 +40,7 @@ export type CreateBlockOptions = {
 export type CodeHighlightOptions = Omit<CreateBlockOptions, 'lang'> & {
   langs: string[];
   themes: CodeBlockTheme;
-  embedRaw?: boolean;
+  allowCopy?: boolean;
   transform?: (code: string) => string;
 };
 
@@ -51,7 +51,7 @@ const inlineLang = /\{:[a-zA-Z0-9_]+}$/;
  * @returns {(tree) => Promise<void>}
  */
 export const remarkCodeHighlight: Plugin<[CodeHighlightOptions | void], XNode> = (options) => {
-  const { themes, langs, embedRaw = false } = (options ?? {}) as CodeHighlightOptions;
+  const { themes, langs, allowCopy = true } = (options ?? {}) as CodeHighlightOptions;
 
   return async (tree) => {
     const hg = await getSingletonHighlighter({
@@ -77,7 +77,7 @@ export const remarkCodeHighlight: Plugin<[CodeHighlightOptions | void], XNode> =
         lang: node.lang,
         themes,
       });
-      const block = createWrapper(output, node.lang, node.attributes, embedRaw ? node.value : undefined);
+      const block = createWrapper(output, node.lang, node.attributes, allowCopy ? node.value : undefined);
 
       Object.assign(node, block);
     });
@@ -115,70 +115,89 @@ export const createWrapper = (code: string, lang: string, attributes: CodeAttrib
     tagName: 'div',
     attributes: {
       ...props,
-      class: 'code-block',
+      class: 'code-block-outer',
     },
     children: [
       {
         type: 'html-node',
         tagName: 'div',
         attributes: {
-          class: 'code-block-header',
-          standalone: !title,
+          class: 'code-block-inner',
         },
         children: [
           {
             type: 'html-node',
-            tagName: 'span',
-            value: title ?? '',
-            attributes: {
-              class: 'code-block-title',
-            },
-          },
-          {
-            type: 'html-node',
             tagName: 'div',
             attributes: {
-              class: 'code-block-actions',
+              class: 'code-block',
+              standalone: !title,
             },
             children: [
               {
                 type: 'html-node',
-                tagName: 'span',
-                value: lang ?? 'text',
+                tagName: 'div',
                 attributes: {
-                  class: 'code-block-lang',
+                  class: 'code-block-header',
+                  standalone: !title,
                 },
+                children: [
+                  {
+                    type: 'html-node',
+                    tagName: 'span',
+                    value: title ?? '',
+                    attributes: {
+                      class: 'code-block-title',
+                    },
+                  },
+                  {
+                    type: 'html-node',
+                    tagName: 'div',
+                    attributes: {
+                      class: 'code-block-actions',
+                    },
+                    children: [
+                      {
+                        type: 'html-node',
+                        tagName: 'span',
+                        value: lang ?? 'text',
+                        attributes: {
+                          class: 'code-block-lang',
+                        },
+                      },
+                      {
+                        type: 'html-node',
+                        tagName: 'button',
+                        value: ClipboardIcon,
+                        attributes: {
+                          class: 'code-block-copy',
+                          hidden: !rawCode,
+                          title: 'Copy code',
+                          'aria-label': 'Copy code',
+                          'data-raw-code-copy': rawCodeId,
+                        },
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                type: 'html-code',
+                value: code,
+                attributes: {},
               },
               {
                 type: 'html-node',
-                tagName: 'button',
-                value: ClipboardIcon,
+                tagName: 'div',
+                value: rawCode,
+                escape: true,
                 attributes: {
-                  class: 'code-block-copy',
-                  hidden: !rawCode,
-                  title: 'Copy code',
-                  'aria-label': 'Copy code',
-                  'data-raw-code-copy': rawCodeId,
+                  'data-raw-code': rawCodeId,
+                  hidden: true,
                 },
               },
             ],
           },
         ],
-      },
-      {
-        type: 'html-code',
-        value: code,
-        attributes: {},
-      },
-      {
-        type: 'html-node',
-        tagName: 'div',
-        value: rawCode,
-        escape: true,
-        attributes: {
-          'data-raw-code': rawCodeId,
-          hidden: true,
-        },
       },
     ],
   };

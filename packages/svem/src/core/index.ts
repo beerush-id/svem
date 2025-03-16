@@ -26,7 +26,7 @@ import {
 } from '../plugins/index.js';
 import { remarkHtmlNodes } from '../plugins/html.js';
 
-export type MarkidownOptions = {
+export type SvemOptions = {
   decoder?: Array<[Plugin, Settings] | Plugin>;
   encoder?: Array<[Plugin, Settings] | Plugin>;
   remark?: Array<[Plugin, Settings] | Plugin>;
@@ -75,7 +75,7 @@ const rehypeOptions = {
   },
 };
 
-export async function transform(content: string, filename: string, options?: MarkidownOptions) {
+export async function transform(content: string, filename: string, options?: SvemOptions) {
   if (options?.codeHighlight?.theme) {
     options.codeHighlight.themes = {
       light: options.codeHighlight.theme,

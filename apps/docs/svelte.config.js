@@ -6,14 +6,20 @@ const dev = process.env.NODE_ENV === 'development';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	preprocess: [vitePreprocess(), svem()],
+	preprocess: [
+		vitePreprocess(),
+		svem({
+			layout: '$lib/layouts/blog.svelte'
+		})
+	],
 
 	kit: {
 		paths: {
 			base: dev ? '' : '/svem'
 		},
 		adapter: adapter()
-	}
+	},
+	extensions: ['.svelte', '.svem', '.svx']
 };
 
 export default config;
